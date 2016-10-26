@@ -3,12 +3,12 @@ require 'hand'
 
 describe Hand do
   let(:queen_of_hearts) { double("queen of hearts", value: 12, suit: 'heart') }
+  let(:queen_of_diamonds) { double("queen of diamonds", value: 12, suit: 'diamond') }
   let(:queen_of_spades) { double("queen of spades", value: 12, suit: 'spade') }
   let(:eight_of_spades) { double("eight of spades", value: 8, suit: 'spade') }
   let(:nine_of_spades) { double("nine of spades", value: 9, suit: 'spade') }
   let(:ten_of_spades) { double("ten of spades", value: 10, suit: 'spade') }
   let(:cards) { [queen_of_hearts, queen_of_spades, eight_of_spades, nine_of_spades, ten_of_spades]}
-
   subject(:test_hand) { Hand.new(cards) }
 
   describe '#high_card' do
@@ -22,5 +22,15 @@ describe Hand do
       expect(test_hand.one_pair).to eq([queen_of_hearts, queen_of_spades])
     end
   end
+
+  let(:cards) { [queen_of_hearts, queen_of_spades, eight_of_spades, nine_of_spades, queen_of_diamonds] }
+  let(:three_of_a_kind_test_hand) { Hand.new(cards) }
+
+  describe '#three_of_a_kind' do
+    it "returns three of a kind" do
+      expect(three_of_a_kind_test_hand.three_of_a_kind).to eq([queen_of_hearts, queen_of_spades, queen_of_diamonds])
+    end
+  end
+
 
 end

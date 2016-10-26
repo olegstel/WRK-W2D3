@@ -16,4 +16,13 @@ class Hand
       end
     end
   end
+
+  def three_of_a_kind
+    values = Hash.new(0)
+    (0..4).each do |i|
+      values[set[i].value] += 1
+    end
+
+    values.select { |k, v| v == 3 }.key
+  end
 end
